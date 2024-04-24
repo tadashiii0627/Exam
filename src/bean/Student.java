@@ -3,6 +3,7 @@ package bean;
 import java.io.Serializable;
 
 public class Student implements Serializable {
+	//学生番号
 	private String no;
 	private String name;
 	private int entYear;
