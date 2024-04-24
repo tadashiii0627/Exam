@@ -10,7 +10,7 @@ import java.util.List;
 import bean.School;
 
 public class ClassNumDao extends Dao {
-//	ワロタングステン
+//	てすと
 	/**
 	 * filterメソッド 学校を指定してクラス番号の一覧を取得する
 	 *
