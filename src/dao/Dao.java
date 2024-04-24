@@ -9,7 +9,7 @@ public class Dao {
 	/**
 	 * データソース:DataSource:クラスフィールド
 	 */
-	//test!!!!!
+	//test!!!!
 	static DataSource ds;
 
 	/**
