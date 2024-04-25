@@ -52,17 +52,8 @@ public class SubjectListAction extends Action{
 
 
 		//レスポンス値をセット 6
-		//リクエストに入学年度をセット
-		req.setAttribute("f1", sDao);
-		//在学フラグが送信されていた場合
-		if (!=null) {
-			// 在学フラグを立てる
-			isAttend = true;
-			// リクエストに在学フラグをセット
-			req.setAttribute("f2", isAttendStr);
-		}
 		// リクエストに学生リストをセット
-		req.setAttribute("students", students);
+		req.setAttribute("subject", subject);
 		// リクエストにデータをセット
 		req.setAttribute("class_num_set", list);
 		req.setAttribute("ent_year_set", entYearSet);
