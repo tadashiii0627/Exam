@@ -52,24 +52,13 @@ public class SubjectListAction extends Action{
 
 
 		//レスポンス値をセット 6
-		//リクエストに入学年度をセット
-		req.setAttribute("f1");
-		//リクエストにクラス番号をセット
-		req.setAttribute("f2");
-		//在学フラグが送信されていた場合
-		if (null) {
-			// 在学フラグを立てる
-			isAttend = true;
-			// リクエストに在学フラグをセット
-			req.setAttribute("f2", isAttendStr);
-		}
 		// リクエストに学生リストをセット
-		req.setAttribute("students", students);
+		req.setAttribute("subject", subject);
 		// リクエストにデータをセット
 		req.setAttribute("class_num_set", list);
 		req.setAttribute("ent_year_set", entYearSet);
 
 		// JSPへフォワード 7
-		req.getRequestDispatcher("student_list.jsp").forward(req, res);
-	}
+		req.getRequestDispatcher("subject_list.jsp").forward(req, res);
+		}
 	}
