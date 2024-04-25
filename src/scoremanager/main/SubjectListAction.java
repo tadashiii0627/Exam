@@ -60,5 +60,5 @@ public class SubjectListAction extends Action{
 
 		// JSPへフォワード 7
 		req.getRequestDispatcher("subject_list.jsp").forward(req, res);
-	}
+		}
 	}
