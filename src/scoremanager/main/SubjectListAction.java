@@ -53,11 +53,9 @@ public class SubjectListAction extends Action{
 
 		//レスポンス値をセット 6
 		//リクエストに入学年度をセット
-		req.setAttribute("f1");
-		//リクエストにクラス番号をセット
-		req.setAttribute("f2");
+		req.setAttribute("f1", sDao);
 		//在学フラグが送信されていた場合
-		if (null) {
+		if (!=null) {
 			// 在学フラグを立てる
 			isAttend = true;
 			// リクエストに在学フラグをセット
