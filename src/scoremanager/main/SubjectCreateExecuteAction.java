@@ -30,11 +30,8 @@ public class SubjectCreateExecuteAction extends Action {
 					// beanであるstudentにstudent_create.jspからの取得情報(4つ)を格納
 					// 取得されないがDBにあるIS_ATTEND,SCHOOL_CDは
 					Subject subject = new Subject();
-					subject.getCd();
-					subject.setCd();
-					subject.setClassNum(class_num);
+					subject.getCd(cd);
 
-					subject.setAttend(isAttend);
 					subject.setSchool(school);
 
 					SubjectDao sDao= new SubjectDao();
