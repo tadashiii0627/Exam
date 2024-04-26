@@ -39,10 +39,7 @@ public class SubjectListAction extends Action{
 			errors.put("f1", "クラスを指定する場合は入学年度も指定ください。");
 			req.setAttribute("errors", errors);
 			// 全学生情報を取得
-			Subject subject = sDao.filter(teacher.getSchool());
-
-
-
+			List<Subject> list1 = sDao.filter(teacher.getSchool());
 		// リストを初期化
 		List<Integer> entYearSet = new ArrayList<>();
 		// 10年前から1年後まで年をリストに追加
@@ -53,9 +50,9 @@ public class SubjectListAction extends Action{
 
 		//レスポンス値をセット 6
 		// リクエストに学生リストをセット
-		req.setAttribute("subject", subject);
+		req.setAttribute("subject", list1);
 		// リクエストにデータをセット
-		req.setAttribute("class_num_set", list);
+		req.setAttribute("class_num_set", list1);
 		req.setAttribute("ent_year_set", entYearSet);
 
 		// JSPへフォワード 7
