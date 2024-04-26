@@ -20,7 +20,7 @@
 						<div class="form-floating mx-7">
 						科目コード
 						<lable>
-						<input class="form-control px-0 fs-5" autocomplete="off"
+						<input class="" autocomplete="off"
 							id="id-input" maxlength="20" name="no" placeholder="科目コードを入力してください。"
 							style="ime-mode: disabled" type="text" value="${code}" required />
 						</lable>
