@@ -9,14 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bean.School;
-import bean.Student;
 import bean.Subject;
 
 public class SubjectDao extends Dao {
 	//＜＜get メソッド＞＞
-	public Student get(String cd, School school) throws Exception {
-		// 学生インスタンスを初期化
-		Student student = new Student();
+	public Subject get(String cd, School school) throws Exception {
+		// 科目インスタンスを初期化
+		Subject subject = new Subject();
 		// データベースへのコネクションを確立
 		Connection connection = getConnection();
 		// プリペアードステートメント
@@ -38,14 +37,14 @@ public class SubjectDao extends Dao {
 			if (rSet.next()) {
 				// リザルトセットが存在する場合
 				// 学生インスタンスに検索結果(Cd, Name, School)をセット
-				student.setNo(rSet.getString("cd"));
-				student.setName(rSet.getString("name"));
+				subject.setCd(rSet.getString("cd"));
+				subject.setName(rSet.getString("name"));
 				// 学校のフィールドには学校コードで検索した学校インスタンスをセット
-				student.setSchool(schoolDao.get(rSet.getString("school")));
+				subject.setSchool(schoolDao.get(rSet.getString("school")));
 			} else {
 				//リザルトセットが存在しない場合
 				// 学生インスタンスにnullをセット
-				student = null;
+				subject = null;
 			}
 		} catch (Exception e) {
 			throw e;
@@ -67,7 +66,7 @@ public class SubjectDao extends Dao {
 				}
 			}
 		}
-		return student;
+		return subject;
 	}
 
 	// ＜＜filterメソッド＞＞
@@ -142,14 +141,15 @@ public class SubjectDao extends Dao {
 
 	try {
 		// データベースから学生を取得
-		Subject old = get(subject.getCd());
+		// getメソッドの引き数(2つ)指定
+		Subject old = get(subject.getCd(), subject.getSchool());
 		if (old == null) {
 			// 学生が存在しなかった場合
 			// プリペアードステートメントにINSERT文をセット
 			statement = connection.prepareStatement(
 					"insert into subject(school_cd, cd, name) values(?, ?, ?)");
 			// プリペアードステートメントに値をバインド
-			statement.setString(1, subject.getSchool());
+			statement.setString(1, subject.getSchool().getCd());
 			statement.setString(2, subject.getCd());
 			statement.setString(3, subject.getName());
 
@@ -160,11 +160,81 @@ public class SubjectDao extends Dao {
 			// 学生が存在した場合
 			// プリペアードステートメントにUPDATE文をセット
 			statement = connection
-					.prepareStatement("update subject school_cd=?, cd=?, name=?");
+					.prepareStatement("update subject set school_cd=?, cd=?, name=?");
 			//プリペアードステートメントに値をバインド
-			statement.setString(1, subject.getCd());
-			statement.setString(2, subject.get());
-			statement.setString(3, subject.getClassNum());
+			statement.setString(1, subject.getSchool().getCd());
+			statement.setString(2, subject.getCd());
+			statement.setString(3, subject.getName());
+
+			// プリペアードステートメントを実行!!!
+			count = statement.executeUpdate();
+
+		} }catch (Exception e) {
+			throw e;
+		} finally {
+			// プリペアードステートメントを閉じる
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			// コネクションを閉じる
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+		if (count > 0) {
+			// 実行件数が１件以上ある場合
+			return true;
+		} else {
+			// 実行件数が0件の場合
+			return false;
+		}
+
+	}
+
+
+	//＜＜deleteメソッド＞＞
+	public boolean delete(Subject subject) throws Exception {
+	// コネクションを確立
+	Connection connection = getConnection();
+	// プリペアードステートメント
+	PreparedStatement statement = null;
+	// 実行件数
+	int count = 0;
+
+
+	try {
+		// データベースから学生を取得
+		// getメソッドの引き数(2つ)指定
+		Subject old = get(subject.getCd(), subject.getSchool());
+		if (old == null) {
+			// 学生が存在しなかった場合
+			// プリペアードステートメントにDELETE文をセット
+			statement = connection.prepareStatement(
+					"delete from subject where school_cd=?, cd=?");
+			// プリペアードステートメントに値をバインド
+			statement.setString(1, subject.getSchool().getCd());
+			statement.setString(2, subject.getCd());
+
+
+			// プリペアードステートメントを実行!!!
+			count = statement.executeUpdate();
+
+		} else {
+			// 科目が存在した場合
+			// プリペアードステートメントにDELETE文をセット
+			statement = connection
+					.prepareStatement("update subject set school_cd=?, cd=?");
+			//プリペアードステートメントに値をバインド
+			statement.setString(1, subject.getSchool().getCd());
+			statement.setString(2, subject.getCd());
 
 			// プリペアードステートメントを実行!!!
 			count = statement.executeUpdate();
@@ -199,6 +269,7 @@ public class SubjectDao extends Dao {
 
 	}
 }
+
 
 
 
