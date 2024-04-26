@@ -21,6 +21,7 @@ public class SubjectDao extends Dao {
 		// プリペアードステートメント
 		PreparedStatement statement = null;
 
+
 		try {
 			// プリペアードステートメントにSQL文をセット
 			statement = connection.prepareStatement("select * from subject where school_cd = ? and cd = ?");
@@ -69,7 +70,7 @@ public class SubjectDao extends Dao {
 		return subject;
 	}
 
-	// ＜＜filterメソッド＞＞
+	// ＜＜メソッド＞＞
     // ＜＜Subjectはbeanが完成しだいエラー消える＞＞
 	public List<Subject> filter(School school) throws Exception {
 
