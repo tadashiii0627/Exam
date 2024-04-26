@@ -19,20 +19,17 @@ public class SubjectCreateExecuteAction extends Action {
 		Teacher teacher = (Teacher)session.getAttribute("user");
 
 		// TODO 自動生成されたメソッド・スタブ
-					int entyear=Integer.parseInt(req.getParameter("ent_year"));
-					String no=req.getParameter("no");
-					String name=req.getParameter("name");
-					String class_num=req.getParameter("class_num");
-
+					String subject_cd=(req.getParameter("subject_cd"));
+					String subject_name=req.getParameter("subject_name");
 					boolean isAttend=true;
 					School school=teacher.getSchool();
 
 					// beanであるstudentにstudent_create.jspからの取得情報(4つ)を格納
 					// 取得されないがDBにあるIS_ATTEND,SCHOOL_CDは
 					Subject subject = new Subject();
-					subject.setCd(class_num);
+					subject.setCd(subject_cd);
 
-					subject.setSchool(school);
+					subject.setName(subject_name);
 
 					SubjectDao sDao= new SubjectDao();
 					sDao.save(subject);
