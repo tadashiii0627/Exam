@@ -23,7 +23,7 @@
 						科目コード
 						<lable>
 						<input class="form-control px-0 fs-5" autocomplete="off"
-							id="id-input" maxlength="20" name="no" placeholder="科目コードを入力してください。"
+							id="id-input" maxlength="20" name="cd" placeholder="科目コードを入力してください。"
 							style="ime-mode: disabled" type="text" value="${cd}" required />
 						</lable>
 						</div>
