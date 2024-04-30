@@ -23,12 +23,12 @@
 								<th>科目名</th>
 							</tr>
 
-							<c:forEach var="student" items="${students}">
+							<c:forEach var="student" items="${subject}">
 								<tr>
 									<td>${subject.cd}</td>
 									<td>${subject.name}</td>
-									<td><a href="SubjectUpdate.action?no=${student.no}">変更</a></td>
-									<td><a href="SubjectDelete.action?no=${student.no}">削除</a></td>
+									<td><a href="SubjectUpdate.action?no=${subject.no}">変更</a></td>
+									<td><a href="SubjectDelete.action?no=${subject.no}">削除</a></td>
 								</tr>
 							</c:forEach>
 						</table>
