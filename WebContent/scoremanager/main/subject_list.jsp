@@ -23,7 +23,7 @@
 								<th>科目名</th>
 							</tr>
 
-							<c:forEach var="student" items="${subject}">
+							<c:forEach var="subject" items="${subject}">
 								<tr>
 									<td>${subject.cd}</td>
 									<td>${subject.name}</td>
