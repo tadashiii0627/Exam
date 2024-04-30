@@ -82,7 +82,7 @@ public class SubjectDao extends Dao {
 		ResultSet rSet = null;
 
 		// SQL文のソート
-		String order = " order by no asc";
+		String order = " order by cd asc";
 
 		// リストを初期化
 		List<Subject> list = new ArrayList<>();

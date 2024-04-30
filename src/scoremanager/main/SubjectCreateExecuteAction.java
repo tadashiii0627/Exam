@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.School;
 import bean.Subject;
 import bean.Teacher;
 import dao.SubjectDao;
@@ -21,8 +20,7 @@ public class SubjectCreateExecuteAction extends Action {
 		// TODO 自動生成されたメソッド・スタブ
 					String subject_cd=(req.getParameter("subject_cd"));
 					String subject_name=req.getParameter("subject_name");
-					boolean isAttend=true;
-					School school=teacher.getSchool();
+					//School school=teacher.getSchool();
 
 					// beanであるstudentにstudent_create.jspからの取得情報(4つ)を格納
 					// 取得されないがDBにあるIS_ATTEND,SCHOOL_CDは
