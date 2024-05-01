@@ -33,7 +33,7 @@
 
 				<div class="my-2 text-start px-4">
 
-					<a href="SubjectListAction.java">科目一覧</a>
+					<a href="SubjectList.action">科目一覧</a>
 
 				</div>
 

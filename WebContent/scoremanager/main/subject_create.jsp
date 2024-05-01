@@ -18,7 +18,7 @@
 
 
 
-						<%-- 学生番号 --%><br>
+						<%-- 科目コード --%><br>
 						<div class="form-floating mx-7">
 						科目コード
 						<lable>
