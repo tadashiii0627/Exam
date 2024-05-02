@@ -14,7 +14,7 @@
 				<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">科目情報削除</h2>
 
 				<%-- 入学年度 --%>
-				<form action ="SubjectdeleteExecuteAction.java" method="get"><br>
+				<form action ="SubjectdeleteExecute.action" method="get"><br>
 
 						<%-- 科目コード --%><br>
 						<div class="form-floating mx-7">
