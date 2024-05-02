@@ -70,7 +70,7 @@ public class SubjectDao extends Dao {
 		return subject;
 	}
 
-	// ＜＜メソッド＞＞
+	// ＜＜filterメソッド＞＞
     // ＜＜Subjectはbeanが完成しだいエラー消える＞＞
 	public List<Subject> filter(School school) throws Exception {
 
@@ -170,7 +170,8 @@ public class SubjectDao extends Dao {
 			// プリペアードステートメントを実行!!!
 			count = statement.executeUpdate();
 
-		} }catch (Exception e) {
+		}
+		}catch (Exception e) {
 			throw e;
 		} finally {
 			// プリペアードステートメントを閉じる
