@@ -33,7 +33,7 @@
 
 				</form>
 				<div class="my-2 text-start px-9">
-					<a href="SubjectListAction.java">戻る</a>
+					<a href="SubjectList.action">戻る</a>
 				</div>
 			</section>
 		</c:param>
