@@ -9,10 +9,11 @@ import bean.Teacher;
 import dao.SubjectDao;
 import tool.Action;
 
-public class SubjectUpdateExecuteAction extends Action {
+public class SubjectDeleteExecuteAction extends Action {
 
 	@Override
-	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
+	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception{
+
 		HttpSession session = req.getSession();
 		Teacher teacher = (Teacher)session.getAttribute("user");
 
@@ -20,7 +21,7 @@ public class SubjectUpdateExecuteAction extends Action {
 		String name = req.getParameter("name");
 
 					// beanであるstudentにstudent_create.jspからの取得情報(4つ)を格納
-					// 取得されないがDBにあるIS_ATTEND,SCHOOL_CDは
+					// 取得されないがDBにあるIS_ATTEND,SCHOOL_CDは削除
 					Subject subject = new Subject();
 					subject.setCd(cd);
 					subject.setSchool(teacher.getSchool());
@@ -31,7 +32,8 @@ public class SubjectUpdateExecuteAction extends Action {
 					// 登録完了！！
 
 					// JSPへフォワード 7
-					req.getRequestDispatcher("subject_update_done.jsp").forward(req, res);
+					req.getRequestDispatcher("subject_delete_done.jsp").forward(req, res);
 
-}
+
+	}
 }
