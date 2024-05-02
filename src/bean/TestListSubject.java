@@ -43,9 +43,9 @@ public void setPoints(Map<Integer,Integer> points){
 	this.points = points;
 }
 public String getPoint(int key){
-	return null;
+	return points.get(key).toString();
 }
 public void putPoint(int key, int value){
-
+	points.put(key, value);
 }
 }
