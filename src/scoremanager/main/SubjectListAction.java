@@ -29,7 +29,7 @@ public class SubjectListAction extends Action{
 
 		LocalDate todaysDate = LocalDate.now();// LocalDateインスタンスを取得
 		int year = todaysDate.getYear();// 現在の年を取得
-		SubjectDao sDao = new SubjectDao();//学生Dao
+		SubjectDao sDao = new SubjectDao();//科目Dao
 		ClassNumDao cNumDao = new ClassNumDao();// クラス番号Daoを初期化
 		Map<String, String>errors = new HashMap<>();// エラーメッセージ
 
@@ -38,7 +38,7 @@ public class SubjectListAction extends Action{
 
 			errors.put("f1", "クラスを指定する場合は入学年度も指定ください。");
 			req.setAttribute("errors", errors);
-			// 全学生情報を取得
+			// 科目情報を取得
 			List<Subject> list1 = sDao.filter(teacher.getSchool());
 		// リストを初期化
 		List<Integer> entYearSet = new ArrayList<>();
