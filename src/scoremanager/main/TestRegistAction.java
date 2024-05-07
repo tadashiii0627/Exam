@@ -43,7 +43,7 @@ public class TestRegistAction extends Action {
 			classNum = req.getParameter("f2");
 			isAttendStr = req.getParameter("f3");
 
-public rost setRequestData(HttpServletRequest req, HttpServletResponse res) throws Exception{
+public  setRequestData(HttpServletRequest req, HttpServletResponse res) throws Exception{
 
 
 			//DBからデータの学校コードをもとにクラス番号の一覧を取得
