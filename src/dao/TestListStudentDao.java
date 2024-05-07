@@ -32,15 +32,46 @@ public class TestListStudentDao extends Dao{
 		return list;
 	}
 	private List<TestListStudent> filter(Student student) throws Exception{
-		List<TestListStudent> list = new ArrayList<>();
-		try {
-			while (student.next()){
-			TestListStudent testliststudent = new TestListStudent();
-			testliststudent.setStudent(student);
-			list.add(testliststudent);
-	}
+			// コネクションを確立
+			Connection connection = getConnection();
+			// プリペアードステートメント
+			PreparedStatement statement = null;
+			// リザルトセット
+			ResultSet rSet = null;
+			// SQL文のソート
+			String order = " order by no asc";
+			//リストを初期化
+			List<TestListStudent> list = new ArrayList<>();
 
-	try {
-		statement = connection.prepareStatement
+			try {
+				// プリペアードステートメントのSQL文をセット
+				statement = connection.prepareStatement("select * from student where school_cd=?"+ order);
+				// プリペアードステートメントに学生番号をバインド
+				statement.setString(1, student.getNo());
+				// プリペアードステートメントを実行
+				rSet = statement.executeQuery();
+
+			} catch (Exception e) {
+				throw e;
+			} finally {
+				// プリペアードステートメントを閉じる
+				if (statement != null) {
+					try {
+						statement.close();
+					} catch (SQLException sqle) {
+						throw sqle;
+					}
+				}
+				// コネクションを閉じる
+				if (connection != null) {
+					try {
+						connection .close();
+					} catch (SQLException sqle) {
+						throw sqle;
+					}
+				}
+			}
+
+			return list;
 	}
 }
