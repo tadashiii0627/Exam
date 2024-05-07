@@ -56,16 +56,22 @@ public class TestListSubjectDao extends Dao {
 
 		// ＊＊＊＊cd部分にはないが入るのか分からない＊＊＊＊//
 		// SQL文のソート
-		String order = " order by cd asc";
+		String order = " order by no asc";
 		// リストを初期化
 		List<TestListStudent> list = new ArrayList<>();
 
 
 		try {
 			// プリペアードステートメントのSQL文をセット
-			statement = connection.prepareStatement("select * from subject where school_cd=?"+ order);
-			// プリペアードステートメントに学校コードをバインド
-			statement.setString(1, school.getCd());
+			statement = connection.prepareStatement("select ent_year, student.class_num=?, no=?, name=?, point=?
+from student left join test on student.no = test.student_no"+ order);
+			// プリペアードステートメントに受け取った値をバインド
+
+			statement.setInt(1, entYear.getEntYear());
+			statement.setString(2, classNum.getClassNum());
+			statement.setString(3, no.getClassNum());
+			statement.setString(4, classNum.getClassNum());
+			statement.setString(4, classNum.getClassNum());
 			// プリペアードステートメントを実行
 			rSet = statement.executeQuery();
 
@@ -77,19 +83,28 @@ public class TestListSubjectDao extends Dao {
 							testlistsubject.setCd(rSet.getString("school_cd"));
 
 							// リストに追加
-							list.add(subject);
+							list.add(testlistsubject);
 						}
-
-
-
-
-
-
-
-
-
-
-
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			// プリペアードステートメントを閉じる
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			// コネクションを閉じる
+			if (connection != null) {
+				try {
+					connection .close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+		return list;
 	}
-
 }
