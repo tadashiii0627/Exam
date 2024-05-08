@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.Student;
+import bean.Subject;
 import bean.Teacher;
 import dao.ClassNumDao;
 import dao.StudentDao;
@@ -47,7 +48,7 @@ public class TestRegistAction extends Action {
 
 
 			//DBからデータの学校コードをもとにクラス番号の一覧を取得
-			List<String> list = cNumDao.filter(teacher.getSchool());
+			List<String> list1 = cNumDao.filter(teacher.getSchool());
 
 			if (entYear !=0 && !classNum.equals("0")) {
 				//入学年度とクラス番号を指定
@@ -66,6 +67,20 @@ public class TestRegistAction extends Action {
 				students = sDao.filter(teacher.getSchool(), isAttend);
 			}
 
+			//DBからデータの学校コードをもとにクラス番号の一覧を取得
+			List<String> list2 = cNumDao.filter(teacher.getSchool());
+
+				errors.put("f1", "クラスを指定する場合は入学年度も指定ください。");
+				req.setAttribute("errors", errors);
+				// 科目情報を取得
+				List<Subject> list3 = sDao.filter(teacher.getSchool());
+			// リストを初期化
+			List<Integer> entYearSet = new ArrayList<>();
+			// 10年前から1年後まで年をリストに追加
+			for (int i = year - 10; i < year + 1; i++ ) {
+				entYearSet.add(i);
+			}
+
 
 			//ビジネスロック 4(絞り込みプルダウン用)
 			if (entYearStr != null) {
@@ -73,10 +88,10 @@ public class TestRegistAction extends Action {
 				entYear = Integer.parseInt(entYearStr);
 			}
 			// リストを初期化
-			List<Integer> entYearSet = new ArrayList<>();
+			List<Integer> entYearSet1 = new ArrayList<>();
 			// 10年前から1年後まで年をリストに追加
 			for (int i = year - 10; i < year + 1; i++ ) {
-				entYearSet.add(i);
+				entYearSet1.add(i);
 			}
 
 
@@ -95,12 +110,14 @@ public class TestRegistAction extends Action {
 			// リクエストに学生リストをセット
 			req.setAttribute("students", students);
 			// リクエストにデータをセット
-			req.setAttribute("class_num_set", list);
-			req.setAttribute("ent_year_set", entYearSet);
+			req.setAttribute("class_num_set", list1);
+			req.setAttribute("ent_year_set", entYearSet1);
 
 			// JSPへフォワード 7
 			req.getRequestDispatcher("test_regist.jsp").forward(req, res);
 		}
+	public void setRequestData(HttpServletRequest req, HttpServletResponse res) throws Exception{
 	}
+}
 
 
