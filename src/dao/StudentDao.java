@@ -10,6 +10,7 @@ import java.util.List;
 
 import bean.School;
 import bean.Student;
+import bean.Subject;
 
 public class StudentDao extends Dao {
 
@@ -332,5 +333,9 @@ public class StudentDao extends Dao {
 				// 実行件数が0件の場合
 				return false;
 			}
+	}
+	public List<Subject> filter(School school) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
 	}
 }
