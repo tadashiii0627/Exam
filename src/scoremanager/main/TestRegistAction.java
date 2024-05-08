@@ -37,12 +37,14 @@ public class TestRegistAction extends Action {
 			Map<String, String>errors = new HashMap<>();// エラーメッセージ
 			//DBからデータの学校コードをもとにクラス番号の一覧を取得
 			List<String> list = cNumDao.filter(teacher.getSchool());
-			//public void setRequestData(HttpServletRequest req, HttpServletResponse res) throws Exception{
 
 			//リクエストパラメーターの取得
 			entYearStr = req.getParameter("f1");
 			classNum = req.getParameter("f2");
 			isAttendStr = req.getParameter("f3");
+
+public  setRequestData(HttpServletRequest req, HttpServletResponse res) throws Exception{
+
 
 			//DBからデータの学校コードをもとにクラス番号の一覧を取得
 			List<String> list = cNumDao.filter(teacher.getSchool());
@@ -100,5 +102,5 @@ public class TestRegistAction extends Action {
 			req.getRequestDispatcher("student_list.jsp").forward(req, res);
 		}
 	}
-
+}
 
