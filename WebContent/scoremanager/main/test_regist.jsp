@@ -69,12 +69,24 @@
 							<tr>
 								<th>入学年度</th>
 								<th>クラス</th>
-								<th>科目</th>
-								<th>回数</th>
-								<th class="text-center">在学中</th>
+								<th>学年番号</th>
+								<th>氏名</th>
+								<th>点数</th>
 								<th></th>
 								<th></th>
 							</tr>
+							<c:forEach var="test" items="${students}">
+								<tr>
+									<th>${test.studen.entYear}</th>
+									<td>${test.student.classNum}</td>
+									<td>${test.student.no}</td>
+									<td>${test.student.name}</td>
+									<td><input class="form-control px-0 fs-5" autocomplete="off"
+										id="id-input" maxlength="20" name="point_${学生番号 }]"
+										style="ime-mode: disabled" type="text" value="${name}" required /></td>
+									<td></td>
+								</tr>
+							</c:forEach>
 						</table>
 					</c:when>
 				</c:choose>
