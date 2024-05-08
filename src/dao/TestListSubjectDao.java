@@ -9,7 +9,6 @@ import java.util.List;
 
 import bean.School;
 import bean.Subject;
-import bean.TestListStudent;
 import bean.TestListSubject;
 
 public class TestListSubjectDao extends Dao {
@@ -45,7 +44,7 @@ public class TestListSubjectDao extends Dao {
 
 
 	// ＜filterメソッド＞
-	public List<TestListStudent> filter(int entYear, String classNum, Subject subject, School school) throws Exception {
+	public List<TestListSubject> filter(int entYear, String classNum, Subject subject, School school) throws Exception {
 
 		// コネクションを確立
 		Connection connection = getConnection();
@@ -56,31 +55,43 @@ public class TestListSubjectDao extends Dao {
 
 		// ＊＊＊＊cd部分にはないが入るのか分からない＊＊＊＊//
 		// SQL文のソート
-		String order = " order by no asc";
+		String order = " order by student.no asc";
 		// リストを初期化
-		List<TestListStudent> list = new ArrayList<>();
+		List<TestListSubject> list = new ArrayList<>();
 
 
 		try {
-			// プリペアードステートメントのSQL文をセット
-			statement = connection.prepareStatement("select ent_year, student.class_num=?, no=?, name=?, point=?
-from student left join test on student.no = test.student_no"+ order);
-			// プリペアードステートメントに受け取った値をバインド
+			// プリペアードステートメントのSQL文をセット (5)
+			//
+			statement = connection.prepareStatement("select ent_year, student.class_num, subject_cd, school_cd, point"
+			+"from student left join test on student.no = test.student_no where ent_year = ?"
+			+"and  student.class_num = ? and subject_cd = ? and school_cd = ?");
 
-			statement.setInt(1, entYear.getEntYear());
-			statement.setString(2, classNum.getClassNum());
-			statement.setString(3, no.getClassNum());
-			statement.setString(4, classNum.getClassNum());
-			statement.setString(4, classNum.getClassNum());
+			// プリペアードステートメントに受け取った値をバインド
+			// 画面設計書(科目別成績一覧)に反映
+			// 入学年度, クラス番号, 科目
+			statement.setInt(1, entYear);
+			statement.setString(2, classNum);
+			statement.setString(3, subject.getCd());
+			// 学生番号
+			statement.setString(4, school.getCd());
+
+
 			// プリペアードステートメントを実行
 			rSet = statement.executeQuery();
 
 						// リザルトセットを完全走査
 						while (rSet.next()){
-							// 学生インスタンスを初期化
+							// 成績一覧のインスタンスを初期化
 							TestListSubject testlistsubject = new TestListSubject();
-							// 学生インスタンスに検索結果をセット
-							testlistsubject.setCd(rSet.getString("school_cd"));
+							// 成績一覧インスタンスに検索結果をセット(入学年度, クラス番号, 学生番号, 名前, 得点)
+							testlistsubject.setEntYear(rSet.getInt("ent_year"));
+							//???????????
+							testlistsubject.setClassNum(rSet.getString("class_num"));
+							testlistsubject.setStudentNo(rSet.getString("no"));
+							testlistsubject.setStudentName(rSet.getString("name"));
+							// 回数と得点をセット
+							testlistsubject.putPoint(rSet.getInt("no"),rSet.getInt("point"));
 
 							// リストに追加
 							list.add(testlistsubject);
