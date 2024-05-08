@@ -43,7 +43,7 @@ public class TestRegistAction extends Action {
 			classNum = req.getParameter("f2");
 			isAttendStr = req.getParameter("f3");
 
-public  setRequestData(HttpServletRequest req, HttpServletResponse res) throws Exception{
+//public  setRequestData(HttpServletRequest req, HttpServletResponse res) throws Exception{
 
 
 			//DBからデータの学校コードをもとにクラス番号の一覧を取得
@@ -99,8 +99,8 @@ public  setRequestData(HttpServletRequest req, HttpServletResponse res) throws E
 			req.setAttribute("ent_year_set", entYearSet);
 
 			// JSPへフォワード 7
-			req.getRequestDispatcher("student_list.jsp").forward(req, res);
+			req.getRequestDispatcher("test_regist.jsp").forward(req, res);
 		}
 	}
-}
+
 
