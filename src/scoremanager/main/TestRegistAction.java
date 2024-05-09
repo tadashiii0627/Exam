@@ -15,6 +15,7 @@ import bean.Subject;
 import bean.Teacher;
 import dao.ClassNumDao;
 import dao.StudentDao;
+import dao.SubjectDao;
 import tool.Action;
 
 public class TestRegistAction extends Action {
@@ -82,18 +83,6 @@ public class TestRegistAction extends Action {
 			}
 
 
-			//ビジネスロック 4(絞り込みプルダウン用)
-			if (entYearStr != null) {
-				//数値に変換
-				entYear = Integer.parseInt(entYearStr);
-			}
-			// リストを初期化
-			List<Integer> entYearSet1 = new ArrayList<>();
-			// 10年前から1年後まで年をリストに追加
-			for (int i = year - 10; i < year + 1; i++ ) {
-				entYearSet1.add(i);
-			}
-
 
 			//レスポンス値をセット 6
 			//リクエストに入学年度をセット
@@ -111,13 +100,31 @@ public class TestRegistAction extends Action {
 			req.setAttribute("students", students);
 			// リクエストにデータをセット
 			req.setAttribute("class_num_set", list1);
-			req.setAttribute("ent_year_set", entYearSet1);
+			req.getAttribute("ent_year_set");
 
 			// JSPへフォワード 7
 			req.getRequestDispatcher("test_regist.jsp").forward(req, res);
 		}
 	public void setRequestData(HttpServletRequest req, HttpServletResponse res) throws Exception{
-	}
+
+			HttpSession session = req.getSession();
+			Teacher teacher = (Teacher)session.getAttribute("user");
+
+				String cd = req.getParameter("cd");
+				String name = req.getParameter("name");
+
+				Subject subject = new Subject();
+				subject.setCd(cd);
+				subject.setSchool(teacher.getSchool());
+				subject.setName(name);
+
+				SubjectDao sDao= new SubjectDao();
+				sDao.save(subject);
+				// 登録完了！！
+
+				// JSPへフォワード 7
+				req.getRequestDispatcher("test_regist_done.jsp").forward(req, res);
+
+
 }
-
-
+}
