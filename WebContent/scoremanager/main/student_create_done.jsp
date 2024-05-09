@@ -21,7 +21,7 @@
 				</div>
 
 				<div class="my-2 text-start px-4">
-					<a href="StudentCreate.action">学生一覧</a>
+					<a href="StudentList.action">学生一覧</a>
 				</div>
 			</section>
 		</c:param>
