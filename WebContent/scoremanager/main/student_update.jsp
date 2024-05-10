@@ -15,7 +15,7 @@
 
 				<%-- 入学年度 --%>
 				<form action ="StudentCreateExecute.action" method="get"><br>
-						<div class="col-14">
+						<div>
 							<label class="form-label" for="student-f1-select">入学年度</label>
 							<input readonly class="form-control px-0 fs-5" autocomplete="off"
 							 name="ent_year"
