@@ -17,6 +17,9 @@
 				<form action ="StudentCreateExecute.action" method="get"><br>
 						<div class="col-14">
 							<label class="form-label" for="student-f1-select">入学年度</label>
+							<input readonly class="form-control px-0 fs-5" autocomplete="off"
+							 name="ent_year"
+							style="ime-mode: disabled" type="text" value="${ent_year}" required />
 						</div>
 
 
@@ -25,8 +28,8 @@
 						<div class="form-floating mx-7">
 						学生番号
 						<lable>
-						<input class="form-control px-0 fs-5" autocomplete="off"
-							id="id-input" maxlength="20" name="no" placeholder="学生番号を入力してください。"
+						<input readonly class="form-control px-0 fs-5" autocomplete="off"
+							id="id-input" maxlength="20" name="no"
 							style="ime-mode: disabled" type="text" value="${no}" required />
 						</lable>
 						</div>
