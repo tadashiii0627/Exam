@@ -23,13 +23,13 @@
 						科目コード
 						<lable>
 						<input class="form-control px-0 fs-5" autocomplete="off"
-							id="id-input" maxlength="20" name="cd" placeholder="科目コードを入力してください。"
+							id="id-input" maxlength="3" name="cd" placeholder="科目コードを入力してください。"
 							style="ime-mode: disabled" type="text" value="${cd}" required />
 						</lable>
 						</div>
 
 
-						<%-- 氏名 --%><br>
+						<%-- 科目名 --%><br>
 						<div class="form-floating mx-7">
 						科目名
 						<lable>
