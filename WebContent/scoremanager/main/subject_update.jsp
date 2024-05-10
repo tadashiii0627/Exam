@@ -13,14 +13,11 @@
 			<section class="me-4">
 				<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">科目情報変更</h2>
 
-				<%-- 入学年度 --%>
-				<form action ="SubjectUpdateExecuteAction.java" method="get"><br>
-
 						<%-- 科目コード --%><br>
 						<div class="form-floating mx-7">
 						科目コード
 						<lable>
-						<input class="" autocomplete="off"
+						<input readonly class="" autocomplete="off"
 							id="id-input" maxlength="20" name="no" placeholder="科目コードを入力してください。"
 							style="ime-mode: disabled" type="text" value="${code}" required />
 						</lable>
