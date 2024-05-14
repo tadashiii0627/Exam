@@ -1,6 +1,5 @@
 package scoremanager.main;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +13,6 @@ import bean.Student;
 import bean.Subject;
 import bean.Teacher;
 import dao.ClassNumDao;
-import dao.StudentDao;
 import dao.SubjectDao;
 import tool.Action;
 
@@ -28,22 +26,22 @@ public class TestRegistAction extends Action {
 
 			String entYearStr="";// 入力された入学年度
 			String classNum = "";// 入力されたクラス番号
-			String isAttendStr = "";// 入力された在学フラグ
-			int entYear = 0;// 入学年度
-			boolean isAttend = false;// 在学フラグ
 			List<Student> students = null;// 学生リスト
-			LocalDate todaysDate = LocalDate.now();// LocalDateインスタンスを取得
-			int year = todaysDate.getYear();// 現在の年を取得
-			StudentDao sDao = new StudentDao();//学生Dao
+			SubjectDao sDao = new SubjectDao();//学生Dao
 			ClassNumDao cNumDao = new ClassNumDao();// クラス番号Daoを初期化
 			Map<String, String>errors = new HashMap<>();// エラーメッセージ
 			//DBからデータの学校コードをもとにクラス番号の一覧を取得
 			List<String> list = cNumDao.filter(teacher.getSchool());
+			// 科目情報を取得
+			//List<Subject> list3 = sDao.filter(teacher.getSchool());
+
 
 			//リクエストパラメーターの取得
 			entYearStr = req.getParameter("f1");
 			classNum = req.getParameter("f2");
-			isAttendStr = req.getParameter("f3");
+			Subject = req.getParameter("f3");
+
+
 
 //public  setRequestData(HttpServletRequest req, HttpServletResponse res) throws Exception{
 
@@ -74,14 +72,13 @@ public class TestRegistAction extends Action {
 				errors.put("f1", "クラスを指定する場合は入学年度も指定ください。");
 				req.setAttribute("errors", errors);
 				// 科目情報を取得
-				List<Subject> list3 = sDao.filter(teacher.getSchool());
+				//List<Subject> list3 = sDao.filter(teacher.getSchool());
 			// リストを初期化
 			List<Integer> entYearSet = new ArrayList<>();
 			// 10年前から1年後まで年をリストに追加
 			for (int i = year - 10; i < year + 1; i++ ) {
 				entYearSet.add(i);
 			}
-
 
 
 			//レスポンス値をセット 6
