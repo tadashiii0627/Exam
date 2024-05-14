@@ -1,12 +1,16 @@
 package scoremanager.main;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.School;
-import bean.Subject;
+import bean.Student;
 import bean.Teacher;
+import dao.ClassNumDao;
 import dao.SubjectDao;
 import tool.Action;
 
@@ -18,18 +22,19 @@ public class TestListSubjectExecuteAction extends Action {
 		HttpSession session = req.getSession();
 		Teacher teacher = (Teacher)session.getAttribute("user");
 
-		// TODO 自動生成されたメソッド・スタブ
-					String subject_cd=(req.getParameter("cd"));
-					String subject_name=req.getParameter("name");
-					School school=teacher.getSchool();
+		String entYearStr="";// 入力された入学年度
+		String classNum = "";// 入力されたクラス番号
+		String subject = "";//入力された科目
+		List<Student> students = null;// 学生リスト
+		SubjectDao sDao = new SubjectDao();//学生Dao
+		ClassNumDao cNumDao = new ClassNumDao();// クラス番号Daoを初期化
+		Map<String, String>errors = new HashMap<>();// エラーメッセージ
+		//DBからデータの学校コードをもとにクラス番号の一覧を取得
+		List<String> list = cNumDao.filter(teacher.getSchool());
 
-					// beanであるstudentにstudent_create.jspからの取得情報(4つ)を格納
-					// 取得されないがDBにあるIS_ATTEND,SCHOOL_CDは
-					Subject subject = new Subject();
-					subject.setCd(subject_cd);
-					subject.setSchool(school);
-					subject.setName(subject_name);
-
-					SubjectDao sDao= new SubjectDao();
+		//リクエストパラメーターの取得
+		entYearStr = req.getParameter("f1");
+		classNum = req.getParameter("f2");
+		subject = req.getParameter("f3");
 	}
 }
