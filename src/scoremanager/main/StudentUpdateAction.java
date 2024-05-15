@@ -23,7 +23,7 @@ public class StudentUpdateAction extends Action {
 		Teacher teacher = (Teacher)session.getAttribute("user");
 
 		ClassNumDao cNumDao = new ClassNumDao();// クラス番号Daoを初期化
-		
+
 		String updateStudent = req.getParameter("no");
 
 
