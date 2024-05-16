@@ -82,7 +82,7 @@ public class TestRegistAction extends Action {
 		req.setAttribute("ent_year_set", entYearSet);
 
 		//JSPへフォワード
-		req.getRequestDispatcher("test_list.jsp").forward(req,res);
+		req.getRequestDispatcher("test_regist.jsp").forward(req,res);
 	}
 
 	private void setTestListStudent(HttpServletRequest req, HttpServletResponse res)throws Exception{
@@ -100,6 +100,6 @@ public class TestRegistAction extends Action {
 				req.setAttribute("class_num_set", list);
 
 				//JSPへフォワード
-				req.getRequestDispatcher("test_list.jsp").forward(req,res);
+				req.getRequestDispatcher("test_regist.jsp").forward(req,res);
 			}
 }
