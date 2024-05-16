@@ -70,6 +70,12 @@ public class TestRegistAction extends Action {
 			entYearSet.add(i);
 		}
 
+		// リストを初期化
+		List<Integer> numList = new ArrayList<>();
+		numList.add(1);
+		numList.add(2);
+
+
 		if (entYearStr != null) {
 			//数値に変換
 			entYear = Integer.parseInt(entYearStr);
@@ -80,6 +86,7 @@ public class TestRegistAction extends Action {
 		req.setAttribute("class_subjectcd_set",list1);
 		req.setAttribute("class_num_set", list);
 		req.setAttribute("ent_year_set", entYearSet);
+		req.setAttribute("num", numList);
 
 		//JSPへフォワード
 		req.getRequestDispatcher("test_regist.jsp").forward(req,res);
