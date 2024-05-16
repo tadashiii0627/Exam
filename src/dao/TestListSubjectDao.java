@@ -63,9 +63,9 @@ public class TestListSubjectDao extends Dao {
 		try {
 			// プリペアードステートメントのSQL文をセット (5)
 			//
-			statement = connection.prepareStatement("select ent_year, student.class_num, subject_cd, school_cd, point"
+			statement = connection.prepareStatement("select ent_year, student.class_num, subject_cd, test.school_cd, point "
 			+"from student left join test on student.no = test.student_no where ent_year = ?"
-			+"and  student.class_num = ? and subject_cd = ? and school_cd = ?");
+			+"and  student.class_num = ? and subject_cd = ? and test.school_cd = ?");
 
 			// プリペアードステートメントに受け取った値をバインド
 			// 画面設計書(科目別成績一覧)に反映

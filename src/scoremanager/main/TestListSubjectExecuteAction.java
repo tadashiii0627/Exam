@@ -8,12 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.Student;
 import bean.Subject;
 import bean.Teacher;
 import bean.TestListSubject;
 import dao.ClassNumDao;
-import dao.SubjectDao;
 import dao.TestListSubjectDao;
 import tool.Action;
 
@@ -28,11 +26,9 @@ public class TestListSubjectExecuteAction extends Action {
 		String entYearStr=null;// 入力された入学年度
 		String classNum =null;// 入力されたクラス番号
 		String subject_cd = null;//入力された科目コード
-		List<Student> students = null;// 学生リスト
 		int entYear = 0;// 入学年度
 		List<TestListSubject> testlistsubjects= null;
 		TestListSubjectDao testlistsubjectdao = new TestListSubjectDao();
-		SubjectDao sDao = new SubjectDao();//学生Dao
 		ClassNumDao cNumDao = new ClassNumDao();// クラス番号Daoを初期化
 		Map<String, String>errors = new HashMap<>();// エラーメッセージ
 		//DBからデータの学校コードをもとにクラス番号の一覧を取得
