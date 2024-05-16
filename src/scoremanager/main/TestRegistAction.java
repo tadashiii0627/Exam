@@ -1,127 +1,105 @@
 package scoremanager.main;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.Student;
 import bean.Subject;
 import bean.Teacher;
+import bean.TestListSubject;
 import dao.ClassNumDao;
 import dao.SubjectDao;
+import dao.TestListStudentDao;
+import dao.TestListSubjectDao;
 import tool.Action;
 
 public class TestRegistAction extends Action {
 
 	@Override
-	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-	//セッションからユーザデータの値を取得
+	public  void execute(HttpServletRequest req, HttpServletResponse res) throws Exception{
+		//セッションからユーザデータの値を取得
 			HttpSession session = req.getSession();
 			Teacher teacher = (Teacher)session.getAttribute("user");
-
-			String entYearStr="";// 入力された入学年度
-			String classNum = "";// 入力されたクラス番号
-			List<Student> students = null;// 学生リスト
-			SubjectDao sDao = new SubjectDao();//学生Dao
 			ClassNumDao cNumDao = new ClassNumDao();// クラス番号Daoを初期化
-			Map<String, String>errors = new HashMap<>();// エラーメッセージ
+
 			//DBからデータの学校コードをもとにクラス番号の一覧を取得
 			List<String> list = cNumDao.filter(teacher.getSchool());
-			// 科目情報を取得
-			//List<Subject> list3 = sDao.filter(teacher.getSchool());
 
+			setTestListSubject(req,res);
+	}
+	private void setTestListSubject(HttpServletRequest req, HttpServletResponse res)throws Exception{
 
-			//リクエストパラメーターの取得
-			entYearStr = req.getParameter("f1");
-			classNum = req.getParameter("f2");
-			Subject = req.getParameter("f3");
+		//セッションからユーザデータの値を取得
+		HttpSession session = req.getSession();
+		Teacher teacher = (Teacher)session.getAttribute("user");
 
+		List<TestListSubject> testlistsubjects= null;
+		TestListStudentDao testliststudentdao = new TestListStudentDao();
+		TestListSubjectDao testlistsubjectdao = new TestListSubjectDao();
+		LocalDate todaysDate = LocalDate.now();// LocalDateインスタンスを取得
+		ClassNumDao cNumDao = new ClassNumDao();// クラス番号Daoを初期化
+		SubjectDao sDao = new SubjectDao();//科目Dao
+		int year = todaysDate.getYear();// 現在の年を取得
+		int entYear = 0;// 入学年度
+		Subject subject = new Subject();
+		String subject_cd = null;// bean.subjectからCdを取得
+		String classNum = null;//bean.subjectからnameを取得
+		String entYearStr = null;//bean.subjectからschoolを取得
 
+		//リクエストパラメーターの取得
+		entYearStr = req.getParameter("f1");
+		classNum = req.getParameter("f2");
+		subject_cd = req.getParameter("f3");
+		subject.setCd(subject_cd);
 
-//public  setRequestData(HttpServletRequest req, HttpServletResponse res) throws Exception{
+		//DBからデータの学校コードをもとにクラス番号の一覧を取得
+		List<String> list = cNumDao.filter(teacher.getSchool());
 
+		// 科目情報を取得
+		List<Subject> list1 = sDao.filter(teacher.getSchool());
 
-			//DBからデータの学校コードをもとにクラス番号の一覧を取得
-			List<String> list1 = cNumDao.filter(teacher.getSchool());
+		// リストを初期化
+		List<Integer> entYearSet = new ArrayList<>();
 
-			if (entYear !=0 && !classNum.equals("0")) {
-				//入学年度とクラス番号を指定
-				students = sDao.filter(teacher.getSchool(), entYear, classNum, isAttend);
-			}else if (entYear != 0 && classNum.equals("0")) {
-				//入学年度のみ指定
-				students = sDao.filter(teacher.getSchool(), entYear, isAttend);
-			}else if (entYear == 0 && classNum == null || entYear == 0 && classNum.equals("0")) {
-				//指定なしの場合
-				//全学生情報を取得
-				students = sDao.filter(teacher.getSchool(), isAttend );
-			}else {
-				errors.put("f1", "クラスを指定する場合は入学年度も指定ください。");
-				req.setAttribute("errors", errors);
-				// 全学生情報を取得
-				students = sDao.filter(teacher.getSchool(), isAttend);
-			}
-
-			//DBからデータの学校コードをもとにクラス番号の一覧を取得
-			List<String> list2 = cNumDao.filter(teacher.getSchool());
-
-				errors.put("f1", "クラスを指定する場合は入学年度も指定ください。");
-				req.setAttribute("errors", errors);
-				// 科目情報を取得
-				//List<Subject> list3 = sDao.filter(teacher.getSchool());
-			// リストを初期化
-			List<Integer> entYearSet = new ArrayList<>();
-			// 10年前から1年後まで年をリストに追加
-			for (int i = year - 10; i < year + 1; i++ ) {
-				entYearSet.add(i);
-			}
-
-
-			//レスポンス値をセット 6
-			//リクエストに入学年度をセット
-			req.setAttribute("f1", entYear);
-			//リクエストにクラス番号をセット
-			req.setAttribute("f2", classNum);
-			//在学フラグが送信されていた場合
-			if (isAttendStr != null) {
-				// 在学フラグを立てる
-				isAttend = true;
-				// リクエストに在学フラグをセット
-				req.setAttribute("f2", isAttendStr);
-			}
-			// リクエストに学生リストをセット
-			req.setAttribute("students", students);
-			// リクエストにデータをセット
-			req.setAttribute("class_num_set", list1);
-			req.getAttribute("ent_year_set");
-
-			// JSPへフォワード 7
-			req.getRequestDispatcher("test_regist.jsp").forward(req, res);
+		// 10年前から1年後まで年をリストに追加
+		for (int i = year - 10; i < year + 1; i++ ) {
+			entYearSet.add(i);
 		}
-	public void setRequestData(HttpServletRequest req, HttpServletResponse res) throws Exception{
 
-			HttpSession session = req.getSession();
-			Teacher teacher = (Teacher)session.getAttribute("user");
+		if (entYearStr != null) {
+			//数値に変換
+			entYear = Integer.parseInt(entYearStr);
+		}
+		testlistsubjects = testlistsubjectdao.filter(entYear, classNum, subject, teacher.getSchool());
 
-				String cd = req.getParameter("cd");
-				String name = req.getParameter("name");
+		// リクエストにデータをセット
+		req.setAttribute("class_subjectcd_set",list1);
+		req.setAttribute("class_num_set", list);
+		req.setAttribute("ent_year_set", entYearSet);
 
-				Subject subject = new Subject();
-				subject.setCd(cd);
-				subject.setSchool(teacher.getSchool());
-				subject.setName(name);
+		//JSPへフォワード
+		req.getRequestDispatcher("test_list.jsp").forward(req,res);
+	}
 
-				SubjectDao sDao= new SubjectDao();
-				sDao.save(subject);
-				// 登録完了！！
+	private void setTestListStudent(HttpServletRequest req, HttpServletResponse res)throws Exception{
+		//セッションからユーザデータの値を取得
+				LocalDate todaysDate = LocalDate.now();// LocalDateインスタンスを取得
+				HttpSession session = req.getSession();
+				Teacher teacher = (Teacher)session.getAttribute("user");
 
-				// JSPへフォワード 7
-				req.getRequestDispatcher("test_regist_done.jsp").forward(req, res);
+				ClassNumDao cNumDao = new ClassNumDao();// クラス番号Daoを初期化
 
+				//DBからデータの学校コードをもとにクラス番号の一覧を取得
+				List<String> list = cNumDao.filter(teacher.getSchool());
 
-}
+				// リクエストにデータをセット
+				req.setAttribute("class_num_set", list);
+
+				//JSPへフォワード
+				req.getRequestDispatcher("test_list.jsp").forward(req,res);
+			}
 }
