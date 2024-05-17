@@ -2,7 +2,9 @@ package scoremanager.main;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -94,17 +96,47 @@ public class TestRegistAction extends Action {
 
 	private void setTestListStudent(HttpServletRequest req, HttpServletResponse res)throws Exception{
 		//セッションからユーザデータの値を取得
-				LocalDate todaysDate = LocalDate.now();// LocalDateインスタンスを取得
 				HttpSession session = req.getSession();
 				Teacher teacher = (Teacher)session.getAttribute("user");
 
+				String entYearStr=null;// 入力された入学年度
+				String classNum =null;// 入力されたクラス番号
+				String subject_cd = null;//入力された科目コード
+				int entYear = 0;// 入学年度
+				String numStr= null;
+				int num = 0;
+				List<TestListSubject> testlistsubjects= null;
+				TestListSubjectDao testlistsubjectdao = new TestListSubjectDao();
 				ClassNumDao cNumDao = new ClassNumDao();// クラス番号Daoを初期化
+				Map<String, String>errors = new HashMap<>();// エラーメッセージ
+				Subject subject = new Subject();
+
+				//リクエストパラメーターの取得
+				entYearStr = req.getParameter("f1");
+				classNum = req.getParameter("f2");
+				subject_cd = req.getParameter("f3");
+				numStr = req.getParameter("f4");
+				subject.setCd(subject_cd);
+
+				if(entYearStr==null || classNum==null || subject_cd==null || numStr==null){
+					errors.put("f1", "入学年度とクラスと科目と回数を選択してください。");
+					req.setAttribute("errors", errors);
+				}else{
+					if (entYearStr != null) {
+						//数値に変換
+						entYear = Integer.parseInt(entYearStr);
+						num = Integer.parseInt(numStr);
+					}testlistsubjects = testlistsubjectdao.filter(entYear, classNum, subject,teacher.getSchool());
+				}
 
 				//DBからデータの学校コードをもとにクラス番号の一覧を取得
 				List<String> list = cNumDao.filter(teacher.getSchool());
 
 				// リクエストにデータをセット
-				req.setAttribute("class_num_set", list);
+				req.setAttribute("ent_year_set", entYear);
+				req.setAttribute("class_num_set", classNum);
+				req.setAttribute("class_subjectcd_set", subject);
+				req.setAttribute("num", num);
 
 				//JSPへフォワード
 				req.getRequestDispatcher("test_regist.jsp").forward(req,res);

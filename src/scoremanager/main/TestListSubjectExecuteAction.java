@@ -41,7 +41,7 @@ public class TestListSubjectExecuteAction extends Action {
 		subject_cd = req.getParameter("f3");
 		subject.setCd(subject_cd);
 
-		if(entYearStr==null || classNum==null || classNum==null){
+		if(entYearStr==null || classNum==null || subject==null){
 			errors.put("f1", "入学年度とクラスと科目を選択してください。");
 			req.setAttribute("errors", errors);
 		}else{
