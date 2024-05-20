@@ -66,6 +66,7 @@
 							style="ime-mode: disabled" type="text" value="${name}" required />
 
 						</div>
+						<form action = "TestListSubjectExecute.Action" method="get">
 						<div class="col-2 text-center">
 						<input type="hidden" name="f" value="st">
 							<button class="btn btn-secondary" id="filter-button">検索</button>

@@ -55,7 +55,7 @@ public class TestListSubjectExecuteAction extends Action {
 				req.setAttribute("testlistsubjects", testlistsubjects);
 				// リクエストにデータをセット
 				req.setAttribute("class_num_set", list);
-				//req.setAttribute("ent_year_set", entYearSet);
+				req.setAttribute("ent_year_set", entYear);
 
 				// JSPへフォワード 7
 				req.getRequestDispatcher("test_list_subject.jsp").forward(req, res);
