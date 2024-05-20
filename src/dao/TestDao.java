@@ -168,7 +168,7 @@ public class TestDao extends Dao{
 				throw e;
 			}
 		} finally {
-			if(connection ! = null){
+			if(connection != null){
 				try{
 					connection.setAutoCommit(true);
 					connection.close();
@@ -207,7 +207,18 @@ public class TestDao extends Dao{
 		} catch (Exception e) {
 			throw e;
 		} finally {
-			if (statement !se)
+			if (statement !=null){
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+		if (count > 0){
+			return true;
+		}else {
+			return false;
 		}
 	}
 	public boolean delete(List<Test> list)throws Exception {
