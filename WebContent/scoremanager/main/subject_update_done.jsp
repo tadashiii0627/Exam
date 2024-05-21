@@ -25,11 +25,6 @@
 				<p>変更が完了しました。</p>
 
 
-				<div class="my-2 text-start px-4">
-
-					<a href="SubjectUpdateExcuteAction.java">戻る</a>
-
-				</div>
 
 				<div class="my-2 text-start px-4">
 
