@@ -115,8 +115,8 @@ public class TestDao extends Dao{
 		ResultSet rSet = null;
 
 		//SQL文の条件
-		String condition = "and Test.subject.cd=? and Test.no=?"
-						+"where Student.entYesr=? and student classNum=? and student.attend=true";
+		String condition = "and Test.subject_cd=? and Test.no=?"
+						+"where Student ent_Yesr=? and student class_Num=? and student.is_attend=true";
 		//SQL文のソート
 		String order = " order by student.no asc";
 
@@ -185,7 +185,7 @@ public class TestDao extends Dao{
 		try{
 			Test old = get(test.getStudent(), test.getSubject(), test.getSchool() , test.getNo());
 			if (old == null){
-				statement = connection.prepareStatement("insert it test(point, no, student.no , subject.cd , class.num) values(?,?,?,?,?,?)");
+				statement = connection.prepareStatement("insert it test(point, no, student_no , subject_cd , class.num) values(?,?,?,?,?,?)");
 				statement.setInt(1,  test.getPoint());
 				statement.setInt(2, test.getNo());
 				statement.setString(3, test.getStudent().getNo());
