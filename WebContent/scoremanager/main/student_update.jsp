@@ -30,7 +30,7 @@
 						<lable>
 						<input readonly class="form-control px-0 fs-5" autocomplete="off"
 							id="id-input" maxlength="20" name="no"
-							style="ime-mode: disabled" type="text" value="${no_set}" required />
+							style="ime-mode: disabled" type="text" value="" required />
 						</lable>
 						</div>
 
@@ -51,7 +51,7 @@
 							<lable class="form-label" for="student-f2-select">クラス</lable>
 							<select class="form-select " id="student-f2-select" name="class_num">
 								<option value="0">--------</option>
-								<c:forEach var="num" items="${class_num}">
+								<c:forEach var="num" items="${no_set}">
 									<%-- 現在のnumと選択されていたf2が一致していた場合selectedを追記 --%>
 									<option value="${num}"> <c:if test="${num==f2}">selected</c:if>${num}</option>
 								</c:forEach>

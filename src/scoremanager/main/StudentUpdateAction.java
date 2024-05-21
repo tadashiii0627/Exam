@@ -40,7 +40,7 @@ public class StudentUpdateAction extends Action {
 		// リクエストにデータをセット
 		req.setAttribute("no_set", list);
 		req.setAttribute("ent_year", entYearSet);
-
+		req.setAttribute("no", updateStudent);
 
 		// JSPへフォワード 7
 		req.getRequestDispatcher("student_update.jsp").forward(req, res);
