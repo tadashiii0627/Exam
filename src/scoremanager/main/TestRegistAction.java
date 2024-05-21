@@ -107,6 +107,7 @@ public class TestRegistAction extends Action {
 				int num = 0;
 				List<TestListSubject> testlistsubjects= null;
 				TestListSubjectDao testlistsubjectdao = new TestListSubjectDao();
+				TestListStudentDao testliststudentdao = new TestListStudentDao();
 				ClassNumDao cNumDao = new ClassNumDao();// クラス番号Daoを初期化
 				Map<String, String>errors = new HashMap<>();// エラーメッセージ
 				Subject subject = new Subject();
