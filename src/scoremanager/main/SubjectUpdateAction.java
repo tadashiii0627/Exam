@@ -17,10 +17,14 @@ public class SubjectUpdateAction extends Action{
 
 				SubjectDao subjectdao = new SubjectDao();// 科目Daoを初期化
 
-				String cd = request.getParameter("cd");
+				String cd = request.getParameter("no");
 				//String schoolCd = teacher.getSchool().getCd();
 
 				Subject subject = subjectdao.get(cd, teacher.getSchool());
+				request.setAttribute("code",cd );
+
+
+
 		//JSPへフォワード
 		request.getRequestDispatcher("subject_update.jsp").forward(request,response);
 	}

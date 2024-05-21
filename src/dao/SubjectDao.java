@@ -41,7 +41,7 @@ public class SubjectDao extends Dao {
 				subject.setCd(rSet.getString("cd"));
 				subject.setName(rSet.getString("name"));
 				// 学校のフィールドには学校コードで検索した学校インスタンスをセット
-				subject.setSchool(schoolDao.get(rSet.getString("school")));
+				subject.setSchool(schoolDao.get(rSet.getString("school_cd")));
 			} else {
 				//リザルトセットが存在しない場合
 				// 学生インスタンスにnullをセット
