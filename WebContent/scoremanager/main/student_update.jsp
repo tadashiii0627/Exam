@@ -19,7 +19,7 @@
 							<label class="form-label" for="student-f1-select">入学年度</label>
 							<input readonly class="form-control px-0 fs-5" autocomplete="off"
 							 name="ent_year"
-							style="ime-mode: disabled" type="text" value="${ent_year}" required />
+							style="ime-mode: disabled" type="text" value="${ent_year_set}" required />
 						</div>
 
 
@@ -30,7 +30,7 @@
 						<lable>
 						<input readonly class="form-control px-0 fs-5" autocomplete="off"
 							id="id-input" maxlength="20" name="no"
-							style="ime-mode: disabled" type="text" value="${no}" required />
+							style="ime-mode: disabled" type="text" value="${no_set}" required />
 						</lable>
 						</div>
 
@@ -51,7 +51,7 @@
 							<lable class="form-label" for="student-f2-select">クラス</lable>
 							<select class="form-select " id="student-f2-select" name="class_num">
 								<option value="0">--------</option>
-								<c:forEach var="num" items="${class_num_set}">
+								<c:forEach var="num" items="${class_num}">
 									<%-- 現在のnumと選択されていたf2が一致していた場合selectedを追記 --%>
 									<option value="${num}"> <c:if test="${num==f2}">selected</c:if>${num}</option>
 								</c:forEach>

@@ -38,8 +38,8 @@ public class StudentUpdateAction extends Action {
 
 
 		// リクエストにデータをセット
-		req.setAttribute("class_num_set", list);
-		req.setAttribute("ent_year_set", entYearSet);
+		req.setAttribute("num", list);
+		req.setAttribute("year", entYearSet);
 
 
 		// JSPへフォワード 7
