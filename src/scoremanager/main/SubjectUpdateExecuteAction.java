@@ -16,7 +16,7 @@ public class SubjectUpdateExecuteAction extends Action {
 		HttpSession session = req.getSession();
 		Teacher teacher = (Teacher)session.getAttribute("user");
 
-		String cd = req.getParameter("cd");
+		String cd = req.getParameter("no");
 		String name = req.getParameter("name");
 
 					// beanであるstudentにstudent_create.jspからの取得情報(4つ)を格納
