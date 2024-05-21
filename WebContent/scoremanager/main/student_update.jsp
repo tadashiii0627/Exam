@@ -14,7 +14,7 @@
 				<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">学生情報変更</h2>
 
 				<%-- 入学年度 --%>
-				<form action ="SubjectUpdateExecute.action" method="get"><br>
+				<form action ="StudentCreateExecute.action" method="get"><br>
 						<div>
 							<label class="form-label" for="student-f1-select">入学年度</label>
 							<input readonly class="form-control px-0 fs-5" autocomplete="off"
