@@ -12,8 +12,9 @@
 		<c:param name="content">
 			<section class="me-4">
 				<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">科目情報変更</h2>
-				<form>
-						<%-- 科目コード --%><br>
+
+						<%-- 科目コード --%>
+						<form action ="SubjectUpdetaExecute.action" method="get"><br><br>
 						<div class="form-floating mx-7">
 						科目コード
 						<lable>
