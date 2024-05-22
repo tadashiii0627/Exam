@@ -19,8 +19,8 @@
 							<label class="form-label" for="student-f1-select">入学年度</label>
 							<select class="form-select " id="student-f1-select" name="f1">
 								<option value="0">--------</option>
-								<c:forEach var="year" items="${year}">
-									<option value="${year}"> <c:if test="${year==f1}">selected</c:if>${year}</option>
+								<c:forEach var="year" items="${ent_year_set}">
+									<option value="${year}" <c:if test="${year==f1}">selected</c:if>>${year}</option>
 								</c:forEach>
 							</select>
 						</div>
@@ -32,7 +32,7 @@
 								<option value="0">--------</option>
 								<c:forEach var="num" items="${class_num_set}">
 									<%-- 現在のnumと選択されていたf2が一致していた場合selectedを追記 --%>
-									<option value="${num}"> <c:if test="${num==f2}">selected</c:if>${num}</option>
+									<option value="${num}" <c:if test="${num==f2}">selected</c:if>>${num}</option>
 								</c:forEach>
 							</select>
 						</div>
@@ -40,8 +40,8 @@
 							<lable class="form-label" for="student-f3-select">科目</lable>
 							<select class="form-select " id="student-f3-select" name="f3">
 								<option value="0">--------</option>
-								<c:forEach var="num" items="${class_subject.cd_set}">
-									<option value="${subject.cd}"> <c:if test="${subject.cd==f2}">selected</c:if>${subject.cd}</option>
+								<c:forEach var="subject" items="${class_subjectcd_set}">
+									<option value="${subject.cd}" <c:if test="${subject.cd==f3}">selected</c:if>>${subject.name}</option>
 								</c:forEach>
 							</select>
 						</div>
@@ -49,7 +49,7 @@
 						<input type="hidden" name="f" value="sj">
 							<button class="btn btn-secondary" id="filter-button">検索</button>
 						</div>
-						<div class="mt-2 text-warning">${error.get("f1")}</div>
+						<div class="mt-2 text-warning">${errors.get("f1")}</div>
 
 
 					</div>
@@ -82,11 +82,12 @@
 								<th>1回目</th>
 								<th>2回目</th>
 							</tr>
-							<c:forEach var="student" items="${students}">
+							<c:forEach var="test" items="${testlistsubjects}">
 								<tr>
-									<td>${test.student.entYear}</td>
-									<td>${test.student.classNum}</td>
-									<td>${test.student.Name}</td>
+									<td>${test.entYear}</td>
+									<td>${test.classNum}</td>
+									<td>${test.studentNo}</td>
+									<td>${test.studentName}</td>
 									<td>${test.getPoint(1)}</td>
 									<td>${test.getPoint(2)}</td>
 								</tr>

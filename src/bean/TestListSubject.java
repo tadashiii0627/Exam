@@ -1,5 +1,6 @@
 package bean;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 
 public class TestListSubject implements Serializable{
@@ -10,7 +11,7 @@ private String classNum;
 private Map<Integer,Integer> points;
 
 public TestListSubject(){
-
+points = new HashMap<>();
 };
 public int getEntYear(){
 	return entYear;
@@ -43,7 +44,12 @@ public void setPoints(Map<Integer,Integer> points){
 	this.points = points;
 }
 public String getPoint(int key){
-	return points.get(key).toString();
+	if(points.get(key)==null){
+		return "-";
+	}else{
+		return points.get(key).toString();
+	}
+
 }
 public void putPoint(int key, int value){
 	points.put(key, value);

@@ -63,7 +63,7 @@ public class TestListSubjectDao extends Dao {
 		try {
 			// プリペアードステートメントのSQL文をセット (5)
 			//
-			statement = connection.prepareStatement("select ent_year, student.class_num, subject_cd, test.school_cd, point, student.no,student.name "
+			statement = connection.prepareStatement("select ent_year, student.class_num, subject_cd, test.school_cd,test.no as test_no ,point, student.no,student.name "
 			+"from student left join test on student.no = test.student_no where ent_year = ?"
 			+"and  student.class_num = ? and subject_cd = ? and test.school_cd = ?");
 
@@ -91,7 +91,7 @@ public class TestListSubjectDao extends Dao {
 							testlistsubject.setStudentNo(rSet.getString("no"));
 							testlistsubject.setStudentName(rSet.getString("name"));
 							// 回数と得点をセット
-							testlistsubject.putPoint(rSet.getInt("no"),rSet.getInt("point"));
+							testlistsubject.putPoint(rSet.getInt("test_no"),rSet.getInt("point"));
 
 							// リストに追加
 							list.add(testlistsubject);
