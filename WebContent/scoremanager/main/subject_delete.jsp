@@ -20,9 +20,7 @@
 						<div class="form-floating mx-7">
 						科目コード
 						<lable>
-						<input readonly class="" autocomplete="off"
-							id="id-input" name="no"
-							style="ime-mode: disabled" type="text" value="${code}" required />
+						<p>「${name }(${cd })」を削除してもよろしいですか</p>
 						</lable>
 						</div>
 

@@ -19,7 +19,7 @@ public class SubjectDeleteAction extends Action{
 
 		SubjectDao subjectdao = new SubjectDao();// 科目Daoを初期化
 
-		String cd = req.getParameter("cd");
+		String cd = req.getParameter("no");
 		//String schoolCd = teacher.getSchool().getCd();
 
 		Subject subject = subjectdao.get(cd, teacher.getSchool());
