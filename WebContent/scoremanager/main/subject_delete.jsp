@@ -20,7 +20,7 @@
 						<div class="form-floating mx-7">
 						科目コード
 						<lable>
-						<input class="" autocomplete="off"
+						<input readonly class="" autocomplete="off"
 							id="id-input" name="no"
 							style="ime-mode: disabled" type="text" value="${code}" required />
 						</lable>
