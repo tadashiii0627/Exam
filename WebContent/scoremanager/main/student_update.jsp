@@ -19,7 +19,7 @@
 							<label class="form-label" for="student-f1-select">入学年度</label>
 							<input readonly class="form-control px-0 fs-5" autocomplete="off"
 							 name="ent_year"
-							style="ime-mode: disabled" type="text" value="${ent_year_set}" required />
+							style="ime-mode: disabled" type="text" value="${std}" required />
 						</div>
 
 
@@ -30,7 +30,7 @@
 						<lable>
 						<input readonly class="form-control px-0 fs-5" autocomplete="off"
 							id="id-input" maxlength="20" name="no"
-							style="ime-mode: disabled" type="text" value="" required />
+							style="ime-mode: disabled" type="text" value="${no}" required />
 						</lable>
 						</div>
 

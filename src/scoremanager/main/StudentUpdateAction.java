@@ -25,6 +25,7 @@ public class StudentUpdateAction extends Action {
 		ClassNumDao cNumDao = new ClassNumDao();// クラス番号Daoを初期化
 
 		String updateStudent = req.getParameter("no");
+		String StudentDate = req.getParameter("std");
 
 
 		//DBからデータの学校コードをもとにクラス番号の一覧を取得
@@ -39,8 +40,9 @@ public class StudentUpdateAction extends Action {
 
 		// リクエストにデータをセット
 		req.setAttribute("no_set", list);
-		req.setAttribute("ent_year", entYearSet);
+		req.setAttribute("ent_year_set", entYearSet);
 		req.setAttribute("no", updateStudent);
+		req.setAttribute("std", StudentDate);
 
 		// JSPへフォワード 7
 		req.getRequestDispatcher("student_update.jsp").forward(req, res);
